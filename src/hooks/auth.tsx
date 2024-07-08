@@ -51,21 +51,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       setToken(access_token)
       setIsAuthenticated(true)
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        // Axios error handling
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log('Error', error.message);
-        }
-      } else {
-        // Generic error handling
-        console.log('Error', error);
-      }
+      console.log(error)
       toast.error("E-mail e/ou senha inválidos");
     }
   }
