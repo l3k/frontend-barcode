@@ -5,7 +5,7 @@ import {
   useEffect,
   useState
 } from 'react'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import toast from 'react-hot-toast'
 import { redirect } from 'react-router-dom'
 
@@ -51,8 +51,22 @@ function AuthProvider({ children }: AuthProviderProps) {
       setToken(access_token)
       setIsAuthenticated(true)
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        // Axios error handling
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+      } else {
+        // Generic error handling
+        console.log('Error', error);
+      }
       toast.error("E-mail e/ou senha inválidos");
-      console.log(error)
     }
   }
 
