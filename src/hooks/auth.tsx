@@ -37,7 +37,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn(email: string, password: string) {
     try {
-      console.log(apiUrl)
+      console.log('--- apiUrl ---', apiUrl)
       const response = await axios.post(`${apiUrl}/login`, {
         email,
         password
